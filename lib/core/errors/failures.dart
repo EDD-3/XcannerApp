@@ -21,4 +21,8 @@ class NetworkFailure implements Failure{
     return message;
   }
 
+  @override
+  // TODO: implement stringify
+  bool get stringify => throw UnimplementedError();
+
 }

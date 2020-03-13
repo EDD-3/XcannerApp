@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+
 abstract class Failure extends Equatable {
   @override
   List<Object> get props => [];
@@ -7,22 +8,21 @@ abstract class Failure extends Equatable {
   String getMessage();
 }
 
-class NetworkFailure implements Failure{
+class NetworkFailure implements Failure {
   final String message;
 
-  NetworkFailure({@required this.message,});
+  NetworkFailure({
+    @required this.message,
+  });
 
   @override
   List<Object> get props => [message];
 
   @override
   String getMessage() {
-
     return message;
   }
 
   @override
-  // TODO: implement stringify
   bool get stringify => throw UnimplementedError();
-
 }

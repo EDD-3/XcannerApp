@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 import 'package:xcanner_app/core/errors/exceptions.dart';
 import 'package:xcanner_app/features/chains/data/models/chain_model.dart';
+import 'package:flutter/foundation.dart';
+import 'dart:io';
 
 abstract class ChainRemoteDatasource {
   Future<List<ChainModel>> getChainList();
@@ -18,7 +20,9 @@ class ChainRemoteDatasourceImpl implements ChainRemoteDatasource {
 
   @override
   Future<List<ChainModel>> getChainList() async {
-    final url = 'localhost:4444/api/categories';
+    final url = Platform.isAndroid
+        ? 'http://127.0.0.1:4444/api/categories'
+        : 'http://localhost:4444/api/categories';
 
     final response = await client.get(url);
     switch (response.statusCode) {
@@ -37,7 +41,10 @@ class ChainRemoteDatasourceImpl implements ChainRemoteDatasource {
 
   @override
   Future<ChainModel> getChain(int id) async {
-    final url = 'localhost:4444/api/category/$id';
+    final url = Platform.isAndroid
+        ? 'http://127.0.0.1:4444/api/category/$id'
+        : 'http://localhost:4444/api/category/$id';
+
     final response = await client.get(
       url,
       headers: {'Content-Type': 'application/json'},

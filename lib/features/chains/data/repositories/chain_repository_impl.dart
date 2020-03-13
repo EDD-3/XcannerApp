@@ -13,18 +13,16 @@ class ChainRepositoryImpl implements ChainRepository {
   final ChainRemoteDatasource remoteDatasource;
   final NetworkInfo networkInfo;
 
-ChainRepositoryImpl({
-  @required this.remoteDatasource,
-  @required this.networkInfo
-});
+  ChainRepositoryImpl(
+      {@required this.remoteDatasource, @required this.networkInfo});
 
   @override
-  Future<Either<Failure, List<Chain>>> getChainList()  async {
+  Future<Either<Failure, List<Chain>>> getChainList() async {
     if (await networkInfo.isConnected) {
       try {
         final chainsList = await remoteDatasource.getChainList();
         return Right(chainsList);
-      }on ServerException catch (e) {
+      } on ServerException catch (e) {
         return Left(NetworkFailure(message: e.message));
       }
     }
@@ -41,8 +39,8 @@ ChainRepositoryImpl({
         return Left(NetworkFailure(message: e.message));
       }
     }
-    return Left(NetworkFailure(message: Messages.NO_NETWORK,));
+    return Left(NetworkFailure(
+      message: Messages.NO_NETWORK,
+    ));
   }
-
-  
 }

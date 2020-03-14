@@ -10,7 +10,7 @@ import 'package:meta/meta.dart';
 const String SERVER_FAILURE_MESSAGE = 'Server Failure';
 const String CACHE_FAILURE_MESSAGE = 'Cache Failure';
 const String INVALID_INPUT_FAILURE_MESSAGE =
-    'Ivalid input - The number must be a positive number or zero';
+    'Invalid input - The number must be a positive number or zero';
 
 class ChainsBloc extends Bloc<ChainsEvent, ChainsState> {
   final GetChain getChain;
@@ -40,11 +40,13 @@ class ChainsBloc extends Bloc<ChainsEvent, ChainsState> {
       }, (integer) async* {
         yield ChainsLoadingState();
         final result = await getChain.call(Params(id: integer));
+        print('Hola');
         yield result.fold(
             (failure) => ChainErrorState(errorMessage: failure.getMessage()),
             (chain) => ChainLoadedState(chain: chain));
       });
-    } else if (event is GetChainList) {
+    } else if (event is GetChainsEvent) {
+      yield ChainsLoadingState();
       final result = await getChainList.call(NoParams());
 
       yield result.fold(

@@ -13,7 +13,7 @@ import 'features/chains/presentation/bloc/chains_bloc.dart';
 
 final sl = GetIt.instance;
 
-void init() {
+Future<void> init() async {
   //! Features - Number Trivia
   //Bloc
   sl.registerFactory(

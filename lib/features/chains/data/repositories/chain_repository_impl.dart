@@ -43,4 +43,52 @@ class ChainRepositoryImpl implements ChainRepository {
       message: Messages.NO_NETWORK,
     ));
   }
+
+  @override
+  Future<Either<Failure, Chain>> updateChain(Chain model) async {
+      if (await networkInfo.isConnected) {
+      try {
+        final chain = await remoteDatasource.updateChain(model);
+        return Right(chain);
+      } on ServerException catch (e) {
+        return Left(NetworkFailure(message: e.message));
+      }
+    }
+    return Left(NetworkFailure(
+      message: Messages.NO_NETWORK,
+    ));
+  }
+
+  @override
+  Future<Either<Failure, Chain>> insertChain(Chain model) async {
+
+      if (await networkInfo.isConnected) {
+      try {
+        final chain = await remoteDatasource.insertChain(model);
+        return Right(chain);
+      } on ServerException catch (e) {
+        return Left(NetworkFailure(message: e.message));
+      }
+    }
+    return Left(NetworkFailure(
+      message: Messages.NO_NETWORK,
+    ));
+  }
+
+  @override
+  Future<Either<Failure, Chain>> deleteChain(int id) async {
+
+    if (await networkInfo.isConnected) {
+      try {
+        final chain = await remoteDatasource.deleteChain(id);
+        return Right(chain);
+      } on ServerException catch (e) {
+        return Left(NetworkFailure(message: e.message));
+      }
+    }
+    return Left(NetworkFailure(
+      message: Messages.NO_NETWORK,
+    ));
+  }
+
 }

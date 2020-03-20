@@ -6,4 +6,7 @@ abstract class ChainRepository {
   Future<Either<Failure, List<Chain>>>
   getChainList();
   Future<Either<Failure,Chain>> getChain(int id);
-}
+  Future<Either<Failure,Chain>> updateChain(Chain model);
+  Future<Either<Failure,Chain>> insertChain(Chain model);
+  Future<Either<Failure,Chain>> deleteChain(int id);
+  }

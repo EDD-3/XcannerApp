@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 
 class ChainModel extends Chain {
   ChainModel({
-    @required int id,
+    int id,
     @required String chainName,
   }) : super(
           chainName: chainName,
@@ -17,10 +17,10 @@ class ChainModel extends Chain {
     );
   }
 
-  Map<String,dynamic> toJson() {
+    Map<String,dynamic> toJson() {
     return {
-      'id':id,
       'chain_name': chainName,
     };
-  }
+}
+
 }

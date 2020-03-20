@@ -9,7 +9,7 @@ class Chain extends Equatable {
 
   //Constructor
   Chain({
-    @required this.id,
+    this.id,
     @required this.chainName
   });
   // Lista de elementos para Equatable
